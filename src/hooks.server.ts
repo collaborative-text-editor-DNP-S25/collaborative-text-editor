@@ -19,8 +19,8 @@ const handleParaglide: Handle = ({ event, resolve }) =>
 const initServer: ServerInit = () => {
   const portString = WS_PORT as string;
   const portNumber = Number.parseInt(portString);
-  const mainApi = new ServerApi();
-  mainApi.start(portNumber);
+  const serverApi = new ServerApi();
+  serverApi.start(portNumber);
 };
 
 export const handle: Handle = ({ event, resolve }) => {
