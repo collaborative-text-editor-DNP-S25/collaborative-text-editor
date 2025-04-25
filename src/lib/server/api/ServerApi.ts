@@ -4,10 +4,10 @@ import { Server as IoServer } from "socket.io";
 
 import DocumentRepositoryImpl from "$lib/server/data/DocumentRepositoryImpl";
 import SocketRepositoryImpl from "$lib/server/data/SocketRepositoryImpl";
-import { type ClientToServerEvents } from "$lib/server/domain/entities/events/ClientToServerEvents";
-import { type ServerToClientEvents } from "$lib/server/domain/entities/events/ServerToClientEvents";
-import { type SocketClient } from "$lib/server/domain/entities/SocketClient";
-import { type SubscriberData } from "$lib/server/domain/entities/SubscriberData";
+import { type ClientToServerEvents } from "$lib/common/entities/events/ClientToServerEvents";
+import { type ServerToClientEvents } from "$lib/common/entities/events/ServerToClientEvents";
+import { type SocketClient } from "$lib/common/entities/SocketClient";
+import { type SubscriberData } from "$lib/common/entities/SubscriberData";
 import type DocumentRepository from "$lib/server/domain/repositories/DocumentRepository";
 import type SocketRepository from "$lib/server/domain/repositories/SocketRepository";
 import UseCaseContainer from "$lib/server/domain/UseCaseContainer";
