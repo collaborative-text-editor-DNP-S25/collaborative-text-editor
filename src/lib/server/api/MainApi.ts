@@ -97,5 +97,7 @@ export default class MainApi {
       const id = this.parent.useCaseContainer.deleteDocument.invoke(docId);
       return id;
     }
-  };
+  }
 }
+
+
