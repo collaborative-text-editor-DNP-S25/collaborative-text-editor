@@ -1,0 +1,44 @@
+import type { ClientToServerEvents } from "$lib/common/entities/events/ClientToServerEvents";
+import type { ServerToClientEvents } from "$lib/common/entities/events/ServerToClientEvents";
+import { io, type Socket } from "socket.io-client";
+
+export class ClientApi {
+  private io: Socket<ServerToClientEvents, ClientToServerEvents>;
+  private callbacks = new Map<string, (message: string) => void>();
+
+  constructor(serverUrl: string) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+    this.io = io(serverUrl, {
+      autoConnect: true,
+      reconnection: true,
+      transports: ["websocket"],
+    });
+  }
+
+  private setupSocketHandlers() {
+    this.io.on("sendMessage", (message) => {
+      this.callbacks.forEach((callback) => {
+        callback(message);
+      });
+    });
+
+    this.io.on("connect_error", (err) => {
+      console.error("Connection error:", err.message);
+    });
+  }
+
+  public enterDocument(docId: string): void {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    this.io.emit("enterDocument", docId);
+  }
+
+  public exitDocument(docId: string): void {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    this.io.emit("exitDocument", docId);
+  }
+
+  public updateDocument(docId: string, newContent: string): void {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    this.io.emit("updateDocument", docId, newContent);
+  }
+}
