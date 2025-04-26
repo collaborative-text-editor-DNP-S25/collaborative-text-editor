@@ -7,7 +7,6 @@ export class ClientApi {
   private callbacks = new Map<string, (message: string) => void>();
 
   constructor(serverUrl: string) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     this.io = io(serverUrl, {
       autoConnect: true,
       reconnection: true,
@@ -28,17 +27,14 @@ export class ClientApi {
   }
 
   public enterDocument(docId: string): void {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     this.io.emit("enterDocument", docId);
   }
 
   public exitDocument(docId: string): void {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     this.io.emit("exitDocument", docId);
   }
 
   public updateDocument(docId: string, newContent: string): void {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     this.io.emit("updateDocument", docId, newContent);
   }
 }
