@@ -11,7 +11,7 @@ import { type SubscriberData } from "$lib/common/entities/SubscriberData";
 import type DocumentRepository from "$lib/server/domain/repositories/DocumentRepository";
 import type SocketRepository from "$lib/server/domain/repositories/SocketRepository";
 import UseCaseContainer from "$lib/server/domain/UseCaseContainer";
-import type { DocumentId } from "../domain/entities/Document";
+import type { DocumentId } from "$lib/common/entities/Document";
 
 export default class ServerApi {
   app: Express;
@@ -57,10 +57,12 @@ export default class ServerApi {
 
       socket.on("enterDocument", async (docId) => {
         await this.useCaseContainer.enterDocument.invoke(socket, docId);
+        console.log(`Client [${socket.id}] entered document: ${docId}`);
       });
 
       socket.on("exitDocument", async (docId) => {
         await this.useCaseContainer.exitDocument.invoke(socket, docId);
+        console.log(`Client [${socket.id}] exited document: ${docId}`);
       });
 
       socket.on("disconnect", async () => {
@@ -74,6 +76,9 @@ export default class ServerApi {
 
       socket.on("updateDocument", (docId, newContent) => {
         this.useCaseContainer.updateDocument.invoke(docId, newContent);
+        console.log(
+          `Client [${socket.id}] updated document: ${docId} with new content: ${newContent}`,
+        );
       });
     });
   }
@@ -97,7 +102,5 @@ export default class ServerApi {
       const id = this.parent.useCaseContainer.deleteDocument.invoke(docId);
       return id;
     }
-  }
+  };
 }
-
-

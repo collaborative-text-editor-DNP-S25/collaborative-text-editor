@@ -30,6 +30,8 @@ const initServer: ServerInit = () => {
 const initClient = () => {
   const serverUrl = SERVER_URL as string;
   const clientApi = new ClientApi(serverUrl);
+  clientApi.enterDocument("lol");
+  clientApi.updateDocument("lol", "new content");
   return clientApi;
 };
 

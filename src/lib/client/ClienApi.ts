@@ -12,6 +12,7 @@ export class ClientApi {
       reconnection: true,
       transports: ["websocket"],
     });
+    this.setupSocketHandlers();
   }
 
   private setupSocketHandlers() {
@@ -19,6 +20,7 @@ export class ClientApi {
       this.callbacks.forEach((callback) => {
         callback(message);
       });
+      console.log(message);
     });
 
     this.io.on("connect_error", (err) => {
