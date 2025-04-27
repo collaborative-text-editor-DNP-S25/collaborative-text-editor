@@ -5,7 +5,6 @@ import type { ClientToServerEvents } from "$lib/server/domain/entities/events/Cl
 import type { ServerToClientEvents } from "$lib/server/domain/entities/events/ServerToClientEvents";
 import type { Message } from "$lib/server/domain/repositories/SocketRepository";
 
-
 export class ClientApi {
   private io: Socket<ServerToClientEvents, ClientToServerEvents>;
   private callbacks = new Map<string, (message: string) => void>();

@@ -9,8 +9,12 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
   private static readonly ERROR_DOC_ID: DocumentId = { id: "doc-errorId" }; // Uniform type of non-existent document
 
   async createDocument(): Promise<DocumentId> {
-    console.log(`start creating doc, id before: ${DocumentRepositoryImpl.id.toString()}`);
-    const docId: DocumentId = { id: `doc-${(DocumentRepositoryImpl.id++).toString()}` };
+    console.log(
+      `start creating doc, id before: ${DocumentRepositoryImpl.id.toString()}`,
+    );
+    const docId: DocumentId = {
+      id: `doc-${(DocumentRepositoryImpl.id++).toString()}`,
+    };
     const newDoc: Document = {
       id: docId,
       content: "",
@@ -19,8 +23,10 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
       currentVersionIndex: -1,
     };
     DocumentRepositoryImpl.documents.set(docId, newDoc);
-    console.log(`end creating doc, id after: ${DocumentRepositoryImpl.id.toString()}, num of docs: ${DocumentRepositoryImpl.documents.size.toString()}`);
-    console.log(newDoc)
+    console.log(
+      `end creating doc, id after: ${DocumentRepositoryImpl.id.toString()}, num of docs: ${DocumentRepositoryImpl.documents.size.toString()}`,
+    );
+    console.log(newDoc);
     return docId;
   }
 

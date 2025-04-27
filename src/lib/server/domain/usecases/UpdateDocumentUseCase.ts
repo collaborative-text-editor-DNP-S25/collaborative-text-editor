@@ -10,7 +10,7 @@ export default class UpdateDocumenUseCase {
   constructor(
     private documentRepo: DocumentRepository,
     private socketRepo: SocketRepository,
-  ) { }
+  ) {}
 
   async invoke(docId: DocumentId, newContent: DocumentContent): Promise<void> {
     const document = await this.documentRepo.getDocument(docId);
@@ -20,7 +20,7 @@ export default class UpdateDocumenUseCase {
     }
 
     const updatedVersionHistory = document.versionHistory;
-    
+
     const updatedDocument: Document = {
       id: docId,
       content: newContent,
