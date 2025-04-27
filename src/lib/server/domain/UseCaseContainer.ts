@@ -21,7 +21,6 @@ export default class UseCaseContainer {
   getDocument: GetDocumentUseCase;
   getAllDocuments: GetAllDocumentsUseCase;
 
-
   constructor(
     private documentRepo: DocumentRepository,
     private socketRepo: SocketRepository,

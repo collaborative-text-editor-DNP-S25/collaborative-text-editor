@@ -3,7 +3,6 @@ import type DocumentRepository from "$lib/server/domain/repositories/DocumentRep
 import type { Document } from "$lib/common/entities/Document";
 
 export default class DocumentRepositoryImpl implements DocumentRepository {
-  
   private static id = 0;
   // Map to store the documents
   private static documents = new Map<DocumentId, Document>();
@@ -46,14 +45,16 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
     // });
 
     if (document.content !== existingDoc.content) {
-      existingDoc.versionHistory = existingDoc.versionHistory.slice(0, existingDoc.currentVersionIndex + 1);
+      existingDoc.versionHistory = existingDoc.versionHistory.slice(
+        0,
+        existingDoc.currentVersionIndex + 1,
+      );
       existingDoc.versionHistory.push({
         content: existingDoc.content,
         timestamp: existingDoc.timestamp,
       });
       document.currentVersionIndex = existingDoc.versionHistory.length - 1;
     }
-
 
     DocumentRepositoryImpl.documents.set(docId, {
       ...document,
@@ -74,7 +75,8 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
     }
 
     const newIndex = document.currentVersionIndex - 1;
-    const newContent = newIndex >= 0 ? document.versionHistory[newIndex].content : "";
+    const newContent =
+      newIndex >= 0 ? document.versionHistory[newIndex].content : "";
     const updatedDocument: Document = {
       ...document,
       content: newContent,
@@ -88,7 +90,10 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
 
   async redo(docId: DocumentId): Promise<Document | undefined> {
     const document = DocumentRepositoryImpl.documents.get(docId);
-    if (!document || document.currentVersionIndex >= document.versionHistory.length - 1) {
+    if (
+      !document ||
+      document.currentVersionIndex >= document.versionHistory.length - 1
+    ) {
       return undefined;
     }
 
@@ -105,12 +110,14 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
     return updatedDocument;
   }
 
-  async getAllDocuments(): Promise<DocumentId[]>{
+  async getAllDocuments(): Promise<DocumentId[]> {
     var documentIds: DocumentId[] = [];
-    DocumentRepositoryImpl.documents.forEach((value: Document, key: DocumentId) => {
-      documentIds.push(key);
-  });
+    DocumentRepositoryImpl.documents.forEach(
+      (value: Document, key: DocumentId) => {
+        documentIds.push(key);
+      },
+    );
 
-  return documentIds;
+    return documentIds;
   }
 }
