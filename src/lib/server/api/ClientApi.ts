@@ -33,8 +33,8 @@ export class ClientApi {
 
     this.io.on("sendDocumentIds", (documentIds) => {
       this.getAllDocumentsCallbacks.forEach((callback) => {
-        callback(documentIds)
-      })
+        callback(documentIds);
+      });
     });
 
     this.io.on("connect_error", (err) => {
@@ -76,7 +76,7 @@ export class ClientApi {
 
     return () => {
       this.getAllDocumentsCallbacks.delete(callbackId);
-    }
+    };
   }
 
   public onMessage(callback: OnMessageCallback): () => void {

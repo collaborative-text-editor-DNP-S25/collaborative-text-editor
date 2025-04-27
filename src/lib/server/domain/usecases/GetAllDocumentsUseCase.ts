@@ -2,7 +2,10 @@ import type DocumentRepository from "$lib/server/domain/repositories/DocumentRep
 import type SocketRepository from "../repositories/SocketRepository";
 
 export default class GetAllDocumentsUseCase {
-  constructor(private documentRepo: DocumentRepository, private socketRepo: SocketRepository) {}
+  constructor(
+    private documentRepo: DocumentRepository,
+    private socketRepo: SocketRepository,
+  ) {}
   async invoke(): Promise<void> {
     const ids = await this.documentRepo.getAllDocuments();
     this.socketRepo.sendAllDocuments(ids);

@@ -31,8 +31,10 @@ const initClient = () => {
   const serverUrl = SERVER_URL as string;
   const clientApi = new ClientApi(serverUrl);
 
+  console.log("Hey");
   clientApi.getAllDocuments((documentIds) => {
-    console.log(documentIds)
+    console.log(documentIds);
+    console.log("Hoy");
   });
 
   clientApi.createDocument();
@@ -43,8 +45,10 @@ const initClient = () => {
     console.log(message);
   });
 
+  console.log("Hey");
   clientApi.getAllDocuments((documentIds) => {
-    console.log(documentIds)
+    console.log(documentIds);
+    console.log("Hoy");
   });
 
   return clientApi;

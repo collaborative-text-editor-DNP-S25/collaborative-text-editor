@@ -9,7 +9,7 @@ import type SocketRepository from "$lib/server/domain/repositories/SocketReposit
 import { type Message } from "$lib/server/domain/repositories/SocketRepository";
 
 export default class SocketRepositoryImpl implements SocketRepository {
-  private UNREGISTER_ID = 'unreg'
+  private UNREGISTER_ID = "unreg";
 
   constructor(
     private io: Server<
@@ -25,7 +25,7 @@ export default class SocketRepositoryImpl implements SocketRepository {
   }
 
   sendAllDocuments(documentIds: DocumentId[]): void {
-    this.io.to(this.UNREGISTER_ID).emit("sendDocumentIds", documentIds)
+    this.io.to(this.UNREGISTER_ID).emit("sendDocumentIds", documentIds);
   }
 
   async registerClient(client: SocketClient, docId: DocumentId): Promise<void> {

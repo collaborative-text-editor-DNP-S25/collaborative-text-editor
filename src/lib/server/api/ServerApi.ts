@@ -104,7 +104,7 @@ export default class ServerApi {
 
       socket.on("getAllDocuments", async () => {
         await this.useCaseContainer.getAllDocuments.invoke();
-      })
+      });
     });
   }
 
