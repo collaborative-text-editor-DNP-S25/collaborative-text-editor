@@ -1,6 +1,6 @@
-import { type DocumentId } from "$lib/common/entities/Document";
+import { type DocumentId } from "$lib/server/domain/entities/Document";
 import type DocumentRepository from "$lib/server/domain/repositories/DocumentRepository";
-import type { Document } from "$lib/common/entities/Document";
+import type { Document } from "$lib/server/domain/entities/Document";
 
 export default class DocumentRepositoryImpl implements DocumentRepository {
   private static id = 0;
@@ -9,7 +9,8 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
   private static readonly ERROR_DOC_ID: DocumentId = { id: "doc-errorId" }; // Uniform type of non-existent document
 
   async createDocument(): Promise<DocumentId> {
-    const docId: DocumentId = { id: `doc-${DocumentRepositoryImpl.id++}` };
+    console.log(`start creating doc, id before: ${DocumentRepositoryImpl.id.toString()}`);
+    const docId: DocumentId = { id: `doc-${(DocumentRepositoryImpl.id++).toString()}` };
     const newDoc: Document = {
       id: docId,
       content: "",
@@ -18,6 +19,8 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
       currentVersionIndex: -1,
     };
     DocumentRepositoryImpl.documents.set(docId, newDoc);
+    console.log(`end creating doc, id after: ${DocumentRepositoryImpl.id.toString()}, num of docs: ${DocumentRepositoryImpl.documents.size.toString()}`);
+    console.log(newDoc)
     return docId;
   }
 
@@ -35,7 +38,7 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
   async updateDocument(docId: DocumentId, document: Document): Promise<void> {
     const existingDoc = DocumentRepositoryImpl.documents.get(docId);
     if (!existingDoc) {
-      throw new Error(`Document with id ${docId} not found`);
+      throw new Error(`Document with id ${docId.id} not found`);
     }
 
     // const versionHistory = existingDoc.versionHistory;

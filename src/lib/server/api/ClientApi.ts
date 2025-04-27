@@ -1,6 +1,10 @@
-import type { ClientToServerEvents } from "$lib/common/entities/events/ClientToServerEvents";
-import type { ServerToClientEvents } from "$lib/common/entities/events/ServerToClientEvents";
 import { io, type Socket } from "socket.io-client";
+
+import type { DocumentId } from "$lib/server/domain/entities/Document";
+import type { ClientToServerEvents } from "$lib/server/domain/entities/events/ClientToServerEvents";
+import type { ServerToClientEvents } from "$lib/server/domain/entities/events/ServerToClientEvents";
+import type { Message } from "$lib/server/domain/repositories/SocketRepository";
+
 
 export class ClientApi {
   private io: Socket<ServerToClientEvents, ClientToServerEvents>;
@@ -27,15 +31,15 @@ export class ClientApi {
     });
   }
 
-  public enterDocument(docId: string): void {
+  public enterDocument(docId: DocumentId): void {
     this.io.emit("enterDocument", docId);
   }
 
-  public exitDocument(docId: string): void {
+  public exitDocument(docId: DocumentId): void {
     this.io.emit("exitDocument", docId);
   }
 
-  public updateDocument(docId: string, newContent: string): void {
+  public updateDocument(docId: DocumentId, newContent: Message): void {
     this.io.emit("updateDocument", docId, newContent);
   }
 
@@ -43,14 +47,14 @@ export class ClientApi {
     this.io.emit("createDocument");
   }
 
-  public deleteDocument(docId: string): void {
+  public deleteDocument(docId: DocumentId): void {
     this.io.emit("deleteDocument", docId);
   }
 
-  public undo(docId: string): void {
+  public undo(docId: DocumentId): void {
     this.io.emit("undo", docId);
   }
-  public redo(docId: string): void {
+  public redo(docId: DocumentId): void {
     this.io.emit("redo", docId);
   }
 
