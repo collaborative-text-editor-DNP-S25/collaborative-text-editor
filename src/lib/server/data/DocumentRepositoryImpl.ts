@@ -75,7 +75,7 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
     const newIndex = document.currentVersionIndex - 1;
     const newContent = newIndex >= 0 ? document.versionHistory[newIndex].content : "";
     const updatedDocument: Document = {
-      id: docId,
+      ...document,
       content: newContent,
       timestamp: new Date(),
       versionHistory: document.versionHistory,
@@ -94,7 +94,7 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
     const newIndex = document.currentVersionIndex + 1;
     const newContent = document.versionHistory[newIndex].content;
     const updatedDocument: Document = {
-      id: docId,
+      ...document,
       content: newContent,
       timestamp: new Date(),
       versionHistory: document.versionHistory,
