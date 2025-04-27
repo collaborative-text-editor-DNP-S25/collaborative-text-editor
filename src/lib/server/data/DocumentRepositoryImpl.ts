@@ -3,13 +3,14 @@ import type DocumentRepository from "$lib/server/domain/repositories/DocumentRep
 import type { Document } from "$lib/common/entities/Document";
 
 export default class DocumentRepositoryImpl implements DocumentRepository {
+  
   private static id = 0;
   // Map to store the documents
   private static documents = new Map<DocumentId, Document>();
-  private static readonly ERROR_DOC_ID: DocumentId = "doc-errorId"; // Uniform type of non-existent document
+  private static readonly ERROR_DOC_ID: DocumentId = { id: "doc-errorId" }; // Uniform type of non-existent document
 
   async createDocument(): Promise<DocumentId> {
-    const docId: DocumentId = `doc-${DocumentRepositoryImpl.id++}`;
+    const docId: DocumentId = { id: `doc-${DocumentRepositoryImpl.id++}` };
     const newDoc: Document = {
       id: docId,
       content: "",
@@ -103,7 +104,7 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
     DocumentRepositoryImpl.documents.set(docId, updatedDocument);
     return updatedDocument;
   }
-  
+
   async getAllDocuments(): Promise<DocumentId[]>{
     var documentIds: DocumentId[] = [];
     DocumentRepositoryImpl.documents.forEach((value: Document, key: DocumentId) => {
