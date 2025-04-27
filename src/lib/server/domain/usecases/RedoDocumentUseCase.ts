@@ -2,7 +2,7 @@ import { type DocumentId } from "$lib/common/entities/Document";
 import type DocumentRepository from "$lib/server/domain/repositories/DocumentRepository";
 import type SocketRepository from "$lib/server/domain/repositories/SocketRepository";
 
-export default class UndoDocumentUseCase {
+export default class RedoDocumenUseCase {
   constructor(
     private documentRepo: DocumentRepository,
     private socketRepo: SocketRepository,
