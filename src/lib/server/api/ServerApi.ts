@@ -101,6 +101,10 @@ export default class ServerApi {
           `Client [${socket.id}] performed redo on document: ${docId.id}`,
         );
       });
+
+      socket.on("getAllDocuments", async () => {
+        await this.useCaseContainer.getAllDocuments.invoke();
+      })
     });
   }
 

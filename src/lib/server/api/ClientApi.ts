@@ -5,9 +5,15 @@ import type { ClientToServerEvents } from "$lib/server/domain/entities/events/Cl
 import type { ServerToClientEvents } from "$lib/server/domain/entities/events/ServerToClientEvents";
 import type { Message } from "$lib/server/domain/repositories/SocketRepository";
 
+type OnMessageCallback = (message: string) => void;
+
+type GetAllDocumentsCallback = (documentIds: DocumentId[]) => void;
+
 export class ClientApi {
   private io: Socket<ServerToClientEvents, ClientToServerEvents>;
-  private callbacks = new Map<string, (message: string) => void>();
+
+  private onMessageCallbacks = new Map<string, OnMessageCallback>();
+  private getAllDocumentsCallbacks = new Map<string, GetAllDocumentsCallback>();
 
   constructor(serverUrl: string) {
     this.io = io(serverUrl, {
@@ -20,9 +26,15 @@ export class ClientApi {
 
   private setupSocketHandlers() {
     this.io.on("sendMessage", (message) => {
-      this.callbacks.forEach((callback) => {
+      this.onMessageCallbacks.forEach((callback) => {
         callback(message);
       });
+    });
+
+    this.io.on("sendDocumentIds", (documentIds) => {
+      this.getAllDocumentsCallbacks.forEach((callback) => {
+        callback(documentIds)
+      })
     });
 
     this.io.on("connect_error", (err) => {
@@ -53,16 +65,26 @@ export class ClientApi {
   public undo(docId: DocumentId): void {
     this.io.emit("undo", docId);
   }
+
   public redo(docId: DocumentId): void {
     this.io.emit("redo", docId);
   }
 
-  public onMessage(callback: (message: string) => void): () => void {
+  public getAllDocuments(callback: GetAllDocumentsCallback): () => void {
     const callbackId = crypto.randomUUID();
-    this.callbacks.set(callbackId, callback);
+    this.getAllDocumentsCallbacks.set(callbackId, callback);
 
     return () => {
-      this.callbacks.delete(callbackId);
+      this.getAllDocumentsCallbacks.delete(callbackId);
+    }
+  }
+
+  public onMessage(callback: OnMessageCallback): () => void {
+    const callbackId = crypto.randomUUID();
+    this.onMessageCallbacks.set(callbackId, callback);
+
+    return () => {
+      this.onMessageCallbacks.delete(callbackId);
     };
   }
 }
