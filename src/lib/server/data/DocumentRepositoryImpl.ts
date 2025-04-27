@@ -103,4 +103,13 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
     DocumentRepositoryImpl.documents.set(docId, updatedDocument);
     return updatedDocument;
   }
+  
+  async getAllDocuments(): Promise<DocumentId[]>{
+    var documentIds: DocumentId[] = [];
+    DocumentRepositoryImpl.documents.forEach((value: Document, key: DocumentId) => {
+      documentIds.push(key);
+  });
+
+  return documentIds;
+  }
 }
