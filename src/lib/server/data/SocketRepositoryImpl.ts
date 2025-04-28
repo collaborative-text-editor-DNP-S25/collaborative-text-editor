@@ -9,7 +9,6 @@ import type SocketRepository from "$lib/server/domain/repositories/SocketReposit
 import { type Message } from "$lib/server/domain/repositories/SocketRepository";
 
 export default class SocketRepositoryImpl implements SocketRepository {
-
   constructor(
     private io: Server<
       ClientToServerEvents,
@@ -17,14 +16,14 @@ export default class SocketRepositoryImpl implements SocketRepository {
       never,
       SubscriberData
     >,
-  ) { }
+  ) {}
 
   broadcast(docId: DocumentId, message: Message): void {
     this.io.to(docId.id).emit("sendMessage", message);
   }
 
   sendAllDocuments(client: SocketClient, documentIds: DocumentId[]): void {
-    this.io.to(client.id).emit("sendDocumentIds", documentIds)
+    this.io.to(client.id).emit("sendDocumentIds", documentIds);
   }
 
   async registerClient(client: SocketClient, docId: DocumentId): Promise<void> {
