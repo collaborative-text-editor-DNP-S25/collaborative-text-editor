@@ -2,7 +2,7 @@
   import { api, documentIds } from "$lib/client/state.svelte";
 
   let className =
-    "bg-ctp-surface0 justify-center items-center flex hover:bg-ctp-surface1 active:bg-ctp-surface2 h-16 w-32 rounded-md hover:cursor-pointer";
+    "bg-ctp-surface0 justify-center font-medium hover:font-bold active:text-ctp-blue items-center flex hover:bg-ctp-surface1 active:bg-ctp-surface2 h-16 w-32 rounded-md hover:cursor-pointer";
 </script>
 
 <main class="flex h-full w-full flex-col gap-4 p-4">
