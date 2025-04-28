@@ -31,15 +31,9 @@ const initServer: ServerInit = () => {
 //   const serverUrl = SERVER_URL as string;
 //   const clientApi = new ClientApi(serverUrl);
 
-<<<<<<< HEAD
-  clientApi.createDocument();
-  clientApi.enterDocument({ id: "doc-0" });
-  clientApi.updateDocument({ id: "doc-0" }, "doc update");
-=======
 //   clientApi.onMessage((message) => {
 //     console.log(message);
 //   });
-
 //   clientApi.onGetAllDocuments((documentIds) => {
 //     console.log(documentIds);
 //   });
@@ -47,8 +41,6 @@ const initServer: ServerInit = () => {
 //   clientApi.createDocument();
 //   clientApi.enterDocument({ id: "doc-0" });
 //   clientApi.updateDocument({ id: "doc-0" }, "doc update");
->>>>>>> ea3423d (.)
-
 //   clientApi.getAllDocuments();
 
 //   return clientApi;
