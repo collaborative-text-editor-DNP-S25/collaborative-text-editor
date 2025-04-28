@@ -94,3 +94,8 @@ class ClientApi {
 }
 
 export const api = $state(new ClientApi("http://localhost:8952/"));
+
+export const documentIds = $state({ value: [] as DocumentId[] });
+api.onGetAllDocuments((newDocumentIds) => {
+  documentIds.value = newDocumentIds;
+});
