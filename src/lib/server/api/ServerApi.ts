@@ -56,12 +56,12 @@ export default class ServerApi {
 
       socket.on("enterDocument", async (docId) => {
         await this.useCaseContainer.enterDocument.invoke(socket, docId);
-        console.log(`Client [${socket.id}] entered document: ${docId.id}`);
+        console.log(`Client [${socket.id}] enters room ${docId.id}`);
       });
 
       socket.on("exitDocument", async (docId) => {
         await this.useCaseContainer.exitDocument.invoke(socket, docId);
-        console.log(`Client [${socket.id}] exited document: ${docId.id}`);
+        console.log(`Client [${socket.id}] exits room ${docId.id}`);
       });
 
       socket.on("disconnect", async () => {
@@ -103,7 +103,7 @@ export default class ServerApi {
       });
 
       socket.on("getAllDocuments", async () => {
-        await this.useCaseContainer.getAllDocuments.invoke();
+        await this.useCaseContainer.getAllDocuments.invoke(socket);
       });
     });
   }

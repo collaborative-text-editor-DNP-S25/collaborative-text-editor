@@ -70,7 +70,11 @@ export class ClientApi {
     this.io.emit("redo", docId);
   }
 
-  public getAllDocuments(callback: GetAllDocumentsCallback): () => void {
+  public getAllDocuments(): void {
+    this.io.emit("getAllDocuments");
+  }
+
+  public onGetAllDocuments(callback: GetAllDocumentsCallback): () => void {
     const callbackId = crypto.randomUUID();
     this.getAllDocumentsCallbacks.set(callbackId, callback);
 

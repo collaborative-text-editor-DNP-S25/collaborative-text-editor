@@ -31,25 +31,11 @@ const initClient = () => {
   const serverUrl = SERVER_URL as string;
   const clientApi = new ClientApi(serverUrl);
 
-  console.log("Hey");
-  clientApi.getAllDocuments((documentIds) => {
-    console.log(documentIds);
-    console.log("Hoy");
-  });
-
   clientApi.createDocument();
   clientApi.enterDocument({ id: "doc-0" });
   clientApi.updateDocument({ id: "doc-0" }, "doc update");
 
-  clientApi.onMessage((message) => {
-    console.log(message);
-  });
-
-  console.log("Hey");
-  clientApi.getAllDocuments((documentIds) => {
-    console.log(documentIds);
-    console.log("Hoy");
-  });
+  clientApi.getAllDocuments();
 
   return clientApi;
 };

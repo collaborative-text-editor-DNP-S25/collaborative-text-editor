@@ -7,5 +7,5 @@ export default interface SocketRepository {
   broadcast(docId: DocumentId, message: Message): void;
   registerClient(client: SocketClient, docId: DocumentId): Promise<void>;
   unregisterClient(client: SocketClient, docId: DocumentId): Promise<void>;
-  sendAllDocuments(documentIds: DocumentId[]): void;
+  sendAllDocuments(client: SocketClient, documentIds: DocumentId[]): void;
 }
