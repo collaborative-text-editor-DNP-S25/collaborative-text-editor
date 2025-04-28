@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
-  import { error } from "@sveltejs/kit";
   import { onMount } from "svelte";
   import type { PageProps } from "./$types";
 
@@ -8,18 +6,9 @@
 
   let { data }: PageProps = $props();
 
-  let text = $state<string>();
+  let value = $state<string>();
   api.onMessage((msg) => {
-    text = msg;
-  });
-  $effect(() => {
-    if (text !== undefined) {
-      try {
-        api.updateDocument({ id: data.docId }, text);
-      } catch {
-        error(404);
-      }
-    }
+    value = msg;
   });
 
   onMount(() => {
@@ -31,19 +20,23 @@
 </script>
 
 <main class="flex h-full w-full flex-col gap-4 p-4">
-  <button onclick={() => void goto("../")}>Back</button>
-  <h1>
-    {data.docId}
-  </h1>
+  <header class="flex w-full flex-row items-center justify-center">
+    <a
+      href="../"
+      class="bg-ctp-mantle flex w-24 items-center justify-center place-self-start rounded-md p-2"
+      >Back</a
+    >
 
-  <span
-    class="bg-ctp-surface0 h-32 truncate rounded-xl p-2 whitespace-pre-line"
-  >
-    {text}
-  </span>
+    <h1>
+      {data.docId}
+    </h1>
+  </header>
 
   <textarea
     class="focus:border-ctp-blue border-ctp-overlay0 h-full w-full resize-none rounded-xl border-2 p-2 outline-none"
-    bind:value={text}
+    bind:value
+    oninput={(e) => {
+      api.updateDocument({ id: data.docId }, e.target?.value as string);
+    }}
   ></textarea>
 </main>
