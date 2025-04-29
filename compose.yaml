@@ -5,7 +5,6 @@ services:
     environment:
       - NODE_ENV=production
       - HOST=0.0.0.0
-      - PORT=3000
       - WS_PORT=8952
       - SERVER_URL=http://localhost:8952/
     restart: unless-stopped
