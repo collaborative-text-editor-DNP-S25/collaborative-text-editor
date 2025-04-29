@@ -26,9 +26,9 @@ class ClientApi {
   }
 
   private setupSocketHandlers() {
-    this.io.on("sendMessage", (message) => {
+    this.io.on("sendUpdateMessage", (document) => {
       this.onMessageCallbacks.forEach((callback) => {
-        callback(message);
+        callback(document);
       });
     });
 
@@ -38,9 +38,9 @@ class ClientApi {
       });
     });
 
-    this.io.on("sendDocument", (documentContent) => {
+    this.io.on("sendDocument", (document) => {
       this.onMessageCallbacks.forEach((callback) => {
-        callback(documentContent);
+        callback(document);
       });
     });
 

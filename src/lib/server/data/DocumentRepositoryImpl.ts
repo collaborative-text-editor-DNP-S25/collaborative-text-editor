@@ -150,7 +150,7 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
   getVersionHistory(docId: DocumentId): VersionEntry[] {
     const document = this.documents.get(docId.id);
     if (!document) {
-      throw new Error(`Document with id ${docId} not found`);
+      throw new Error(`Document with id ${docId.id.toString()} not found`);
     }
     return document.versionHistory;
   }

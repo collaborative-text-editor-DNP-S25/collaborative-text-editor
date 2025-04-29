@@ -22,7 +22,7 @@ export default class SocketRepositoryImpl implements SocketRepository {
   ) {}
 
   broadcast(docId: DocumentId, message: ResponseMessage): void {
-    this.io.to(docId.id).emit("sendMessage", message);
+    this.io.to(docId.id).emit("sendUpdateMessage", message);
   }
 
   sendAllDocuments(client: SocketClient, documentIds: DocumentId[]): void {

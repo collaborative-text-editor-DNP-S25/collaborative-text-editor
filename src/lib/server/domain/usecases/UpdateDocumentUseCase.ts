@@ -32,6 +32,6 @@ export default class UpdateDocumentUseCase {
 
     this.documentRepo.updateDocument(docId, updatedDocument);
 
-    this.socketRepo.broadcast(docId, { ok: true, data: newContent });
+    this.socketRepo.broadcast(docId, { ok: true, data: updatedDocument });
   }
 }
