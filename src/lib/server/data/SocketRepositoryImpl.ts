@@ -3,7 +3,7 @@ import { type Server } from "socket.io";
 import {
   type DocumentId,
   type VersionEntry,
-} from "$lib/server/domain/entities/Document";
+} from "$lib/server/domain/entities/DocumentEntity";
 import { type ClientToServerEvents } from "$lib/server/domain/entities/events/ClientToServerEvents";
 import { type ServerToClientEvents } from "$lib/server/domain/entities/events/ServerToClientEvents";
 import { type SocketClient } from "$lib/server/domain/entities/SocketClient";

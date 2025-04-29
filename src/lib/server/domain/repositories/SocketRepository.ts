@@ -1,7 +1,7 @@
 import {
   type DocumentId,
   type VersionEntry,
-} from "$lib/server/domain/entities/Document";
+} from "$lib/server/domain/entities/DocumentEntity";
 import { type SocketClient } from "$lib/server/domain/entities/SocketClient";
 import type { ResponseMessage } from "../entities/ResponseMessage";
 

@@ -1,7 +1,7 @@
 import type {
   DocumentId,
   VersionEntry,
-} from "$lib/server/domain/entities/Document";
+} from "$lib/server/domain/entities/DocumentEntity";
 import type DocumentRepository from "$lib/server/domain/repositories/DocumentRepository";
 import type SocketRepository from "../repositories/SocketRepository";
 import type { SocketClient } from "../entities/SocketClient";

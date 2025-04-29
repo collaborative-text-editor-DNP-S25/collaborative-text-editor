@@ -1,4 +1,4 @@
-import type { DocumentContent } from "./Document";
+import type { DocumentContent } from "./DocumentEntity";
 
 export type ResponseMessage = Success | Error;
 
