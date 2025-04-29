@@ -5,6 +5,7 @@
 
   import { api } from "$lib/client/state.svelte";
   import BackButton from "$lib/components/BackButton.svelte";
+  import { m } from "$lib/paraglide/messages";
 
   let { data }: PageProps = $props();
 
@@ -40,11 +41,11 @@
     <div class="absolute right-0 flex flex-row gap-2">
       <button
         class="active:text-ctp-blue active:bg-ctp-surface1 hover:bg-ctp-surface0 flex w-20 items-center justify-center rounded-md p-2 font-medium hover:font-bold"
-        onclick={() => api.undo({ id: data.docId })}>Undo</button
+        onclick={() => api.undo({ id: data.docId })}>{m.undo()}</button
       >
       <button
         class="active:text-ctp-blue active:bg-ctp-surface1 hover:bg-ctp-surface0 flex w-20 items-center justify-center rounded-md p-2 font-medium hover:font-bold"
-        onclick={() => api.redo({ id: data.docId })}>Redo</button
+        onclick={() => api.redo({ id: data.docId })}>{m.redo()}</button
       >
     </div>
   </header>
