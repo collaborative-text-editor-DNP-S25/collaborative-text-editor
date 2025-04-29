@@ -9,12 +9,12 @@ export default class JumpDocumentUseCase {
   ) {}
 
   invoke(docId: DocumentId, versionIndex: number): void {
-    const document = this.documentRepo.redo(docId);
+    const document = this.documentRepo.jump(docId, versionIndex);
 
     if (document === undefined) {
       this.socketRepo.broadcast(docId, { ok: false });
       return;
     }
-    this.socketRepo.broadcast(docId, { ok: true, data: document.content });
+    this.socketRepo.broadcast(docId, { ok: true, data: document });
   }
 }
