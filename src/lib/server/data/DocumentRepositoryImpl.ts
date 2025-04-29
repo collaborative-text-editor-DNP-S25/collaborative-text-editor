@@ -1,7 +1,7 @@
 import {
   type DocumentId,
   type VersionEntry,
- } from "$lib/server/domain/entities/Document";
+} from "$lib/server/domain/entities/Document";
 import type DocumentRepository from "$lib/server/domain/repositories/DocumentRepository";
 import type { Document } from "$lib/server/domain/entities/Document";
 
@@ -127,7 +127,11 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
 
   jump(docId: DocumentId, versionIndex: number): Document | undefined {
     const document = this.documents.get(docId.id);
-    if (!document || versionIndex < 0 || versionIndex >= document.versionHistory.length) {
+    if (
+      !document ||
+      versionIndex < 0 ||
+      versionIndex >= document.versionHistory.length
+    ) {
       return undefined;
     }
 

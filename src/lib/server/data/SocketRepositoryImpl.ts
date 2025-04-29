@@ -1,6 +1,9 @@
 import { type Server } from "socket.io";
 
-import { type DocumentId, type VersionEntry } from "$lib/server/domain/entities/Document";
+import {
+  type DocumentId,
+  type VersionEntry,
+} from "$lib/server/domain/entities/Document";
 import { type ClientToServerEvents } from "$lib/server/domain/entities/events/ClientToServerEvents";
 import { type ServerToClientEvents } from "$lib/server/domain/entities/events/ServerToClientEvents";
 import { type SocketClient } from "$lib/server/domain/entities/SocketClient";
@@ -30,7 +33,10 @@ export default class SocketRepositoryImpl implements SocketRepository {
     this.io.to(client.id).emit("sendDocument", documentContent);
   }
 
-  sendVersionHistory(client: SocketClient, versionHistory: VersionEntry[]): void {
+  sendVersionHistory(
+    client: SocketClient,
+    versionHistory: VersionEntry[],
+  ): void {
     this.io.to(client.id).emit("sendVersionHistory", versionHistory);
   }
 

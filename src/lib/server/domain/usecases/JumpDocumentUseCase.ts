@@ -6,11 +6,11 @@ export default class JumpDocumentUseCase {
   constructor(
     private documentRepo: DocumentRepository,
     private socketRepo: SocketRepository,
-  ) { }
+  ) {}
 
   invoke(docId: DocumentId, versionIndex: number): void {
     const document = this.documentRepo.redo(docId);
-    
+
     if (document === undefined) {
       this.socketRepo.broadcast(docId, { ok: false });
       return;

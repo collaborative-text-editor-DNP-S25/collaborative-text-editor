@@ -6,11 +6,11 @@ export default class UndoDocumentUseCase {
   constructor(
     private documentRepo: DocumentRepository,
     private socketRepo: SocketRepository,
-  ) { }
+  ) {}
 
   invoke(docId: DocumentId): void {
     const document = this.documentRepo.undo(docId);
-    
+
     if (document === undefined) {
       this.socketRepo.broadcast(docId, { ok: false });
       return;
