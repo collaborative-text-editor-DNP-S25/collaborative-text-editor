@@ -7,6 +7,13 @@
 </script>
 
 <main class="flex h-full w-full flex-col gap-4 p-4">
+  <button
+    class="active:text-ctp-blue active:bg-ctp-surface1 hover:bg-ctp-surface0 flex w-20 items-center justify-center rounded-md p-2 font-medium hover:font-bold"
+    onclick={() => api.getAllDocuments()}
+  >
+    {m.refresh()}
+  </button>
+
   <ul class="flex flex-row flex-wrap gap-4">
     <button
       class={className}
