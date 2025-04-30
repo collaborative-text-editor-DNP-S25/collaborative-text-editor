@@ -5,7 +5,7 @@ import type { ClientToServerEvents } from "$lib/server/domain/entities/events/Cl
 import type { ServerToClientEvents } from "$lib/server/domain/entities/events/ServerToClientEvents";
 import type { Message } from "$lib/server/domain/repositories/SocketRepository";
 import type { ResponseMessage } from "$lib/server/domain/entities/ResponseMessage";
-import type {versionIndex} from "$lib/server/domain/entities/DocumentEntity"
+import type { versionIndex } from "$lib/server/domain/entities/DocumentEntity";
 
 type OnMessageCallback = (message: ResponseMessage) => void;
 
@@ -86,10 +86,10 @@ class ClientApi {
     this.io.emit("getDocument", docId);
   }
 
-  public jump (docId: DocumentId, verIndex: versionIndex): void {
+  public jump(docId: DocumentId, verIndex: versionIndex): void {
     this.io.emit("jump", docId, verIndex);
   }
-  
+
   public onGetAllDocuments(callback: GetAllDocumentsCallback): () => void {
     const callbackId = crypto.randomUUID();
     this.getAllDocumentsCallbacks.set(callbackId, callback);
