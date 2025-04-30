@@ -4,7 +4,7 @@ import {
 } from "$lib/server/domain/entities/DocumentEntity";
 import type DocumentRepository from "$lib/server/domain/repositories/DocumentRepository";
 import type { DocumentEntity } from "$lib/server/domain/entities/DocumentEntity";
-
+import type { versionIndex } from "$lib/server/domain/entities/DocumentEntity";
 export default class DocumentRepositoryImpl implements DocumentRepository {
   private id = 0;
   // Map to store the documents
@@ -135,23 +135,25 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
     return documentIds;
   }
 
-  jump(docId: DocumentId, versionIndex: number): DocumentEntity | undefined {
+  jump(docId: DocumentId, verIndex: versionIndex): DocumentEntity | undefined {
     const document = this.documents.get(docId.id);
+    verIndex+=2; // under construction
+    console.log(`content: ${document?.content}, version: ${verIndex}`); // under construction
     if (
       !document ||
-      versionIndex < 0 ||
-      versionIndex >= document.versionHistory.length
+      verIndex < 0 ||
+      verIndex >= document.versionHistory.length
     ) {
       return undefined;
     }
 
-    const newContent = document.versionHistory[versionIndex].content;
+    const newContent = document.versionHistory[verIndex].content;
     const updatedDocument: DocumentEntity = {
       ...document,
       content: newContent,
       timestamp: new Date(),
       versionHistory: document.versionHistory,
-      currentVersionIndex: versionIndex,
+      currentVersionIndex: verIndex,
     };
     this.documents.set(docId.id, updatedDocument);
     return updatedDocument;
