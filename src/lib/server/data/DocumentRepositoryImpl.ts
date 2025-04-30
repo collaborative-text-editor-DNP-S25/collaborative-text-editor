@@ -137,7 +137,7 @@ export default class DocumentRepositoryImpl implements DocumentRepository {
 
   jump(docId: DocumentId, verIndex: versionIndex): DocumentEntity | undefined {
     const document = this.documents.get(docId.id);
-    verIndex+=2; // under construction
+    verIndex += 1; // under construction
     console.log(`content: ${document?.content}, version: ${verIndex}`); // under construction
     if (
       !document ||
