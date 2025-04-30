@@ -28,7 +28,7 @@
     {#each documentIds.value as docId, i (i)}
       <li class="group relative">
         <button
-          class="hover:bg-ctp-overlay0 active:text-ctp-red active:bg-ctp-overlay1 invisible absolute right-0 flex size-6 items-center justify-center rounded-full font-medium group-hover:visible"
+          class="hover:bg-ctp-overlay0 active:bg-ctp-red-800 invisible absolute right-0 flex size-6 items-center justify-center rounded-full font-medium group-hover:visible"
           onclick={() => {
             api.deleteDocument(docId);
             api.getAllDocuments();
